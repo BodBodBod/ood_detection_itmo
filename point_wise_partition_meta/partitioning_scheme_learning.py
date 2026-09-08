@@ -13,7 +13,7 @@ from sklearn import metrics as sk_metrics
 from matplotlib import pyplot as plt
 import seaborn as sns
 
-from point_wise_detection.partition_ood import (
+from point_wise_partition_meta.partition_ood import (
     DEFAULT_META_FEATURES,
     DecisionTreeScheme,
     EnsemblePartitionOOD,
