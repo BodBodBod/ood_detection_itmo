@@ -1,12 +1,12 @@
 # OOD Detection in Tabular Data
 
-This repository collects three OOD detection methods on tabular data. All of them use the same seven benchmark datasets in `data/`, but they answer different questions at different levels.
+This repository collects three OOD detection methods on tabular data. They share the benchmark tables in `data/` and answer different questions at different resolutions.
 
 | Folder | Question | Method |
 | --- | --- | --- |
 | `sample_wise_ae_ks/` | Is this **batch** OOD? | Autoencoder + KS-test + Monte Carlo |
 | `point_wise_ae_distances/` | Is this **row** OOD? | AE reconstruction error metrics + classifier |
-| `point_wise_partition_meta/` | Is this **row** OOD? | Partition ensemble + meta-features |
+| `point_wise_partition_meta/` | Is this **row** OOD? | Partition ensemble + 36 meta-features |
 
 ```text
 OOD_detection/
@@ -14,14 +14,27 @@ OOD_detection/
 ├── sample_wise_ae_ks/
 ├── point_wise_ae_distances/
 ├── point_wise_partition_meta/
+├── results/
+├── requirements.txt
 └── readme.md
 ```
 
+Install with `pip install -r requirements.txt`. Reported five-fold CSVs for the partition method sit in `results/`. Reproduce them from the repository root:
+
+```bash
+python -m point_wise_partition_meta.run_experiments --task representation
+python -m point_wise_partition_meta.run_experiments --task id_ood
+python -m point_wise_partition_meta.run_experiments --task importance
+python -m point_wise_partition_meta.run_experiments --task groups
+```
+
+Default datasets are Taxi, Electricity, Income, MVx6, California, and ACS Accidents. Taxi is loaded with **6** numeric features.
+
 ---
 
-## [DRAFT] point_wise_partition_meta
+## point_wise_partition_meta
 
-This part detects OOD at the level of **individual rows**. The idea is to split the feature space into many cells with several partition schemes, describe each point by statistics of its cell (meta-features), and train a classifier on top.
+This part detects OOD at the level of **individual rows**. The feature space is split into cells with several partition schemes. Each point is described by 36 statistics of its ID reference cell (meta-features). A classifier is trained on the concatenated descriptor vector.
 
 ### Layout
 
@@ -29,100 +42,27 @@ This part detects OOD at the level of **individual rows**. The idea is to split 
 point_wise_partition_meta/
 ├── partition_ood.py
 ├── partitioning_scheme_learning.py
+├── run_experiments.py
 ├── metacharacteristics_taxonomy_light.md
-├── partition_ood_experiments.ipynb
-├── partition_ood_id_ood_experiments.ipynb
-├── partitioning_scheme_experiment.ipynb
-├── metacharacteristics_exclude_include_experiment.ipynb
-└── metacharacteristics_significance_experiment.ipynb
+└── (legacy notebooks)
 ```
 
-Shared data sits one level up:
+Shared data sits one level up. `*_source` files are in-distribution (ID), `*_target` files are out-of-distribution (OOD). `partition_ood.load_dataset()` resolves paths from the repo root.
 
-```text
-data/
-├── taxi_source.csv / taxi_target.csv
-├── electricity_source.csv / electricity_target.csv
-├── income_source.csv / income_target.csv
-├── mv_x6_source.csv / mv_x6_target.csv
-├── diabites_source.csv / diabites_target.csv
-├── california_source.csv / california_target.csv
-└── acs_accidents_source.csv / acs_accidents_target.csv
-```
-
-`*_source` files are in-distribution (ID), `*_target` files are out-of-distribution (OOD).  
-`partition_ood.load_dataset()` resolves paths from the repo root, so `data/` must stay next to the method folders.
-
-### Core module: `partition_ood.py`
-
-**Partition schemes**
-
-- `QuantileBinningScheme` - quantile bins along one feature.
-- `KMeansScheme` - KMeans clusters on a random feature subset.
-- `DecisionTreeScheme` - a tree fit on synthetic labels; each leaf is a cell.
-
-`EnsemblePartitionOOD` combines all three families: quantile schemes for every feature, several k-means schemes, and several tree schemes.
-
-**Meta-features**
-
-The registry is `ALL_META_FEATURES`. Experiments use a list close to the light taxonomy: point-based distances and outlier counts, marginal and feature-interaction statistics, and basic cell support measures (`log_count`, `density`, and related fields).
-
-**Training and evaluation**
-
-- `build_ood_dataset` - train/test split, fit partitions, build the feature matrix.
-- `partition_fit_data='id'` or `'id+ood'` - whether partition schemes are fit on ID only or on ID plus OOD (test rows never enter the fit step).
-- `cross_validate_ood_classifiers` / `full_pipeline` - cross-validation, class balancing, metrics (ROC-AUC, PR-AUC, F1, and others), plots.
-
-### Scheme hyperparameters: `partitioning_scheme_learning.py`
-
-A thin layer on top of `partition_ood.py` for experiments that vary **one scheme family** instead of the full ensemble.
-
-- `SingleSchemePartitionOOD` - quantile-only, k-means-only, or tree-only mode.
-- Sweeps over `n_bins`, `n_kmeans_clusters`, `tree_max_depth`, `n_tree_partitions`.
-- An optional validation split for hyperparameter search.
-
-Used by `partitioning_scheme_experiment.ipynb`.
-
-### Taxonomy: `metacharacteristics_taxonomy_light.md`
-
-Groups meta-features for the significance experiment:
-
-1. **Point-based** - where the point sits inside its cell.
-2. **Sample-based / Marginal-char** - per-feature stats and entropies inside the cell.
-3. **Sample-based / Feature-interaction** - covariances, correlations, mutual information.
-4. **Base** - cell size, density, tree depth, agreement across schemes.
-
-Only the light taxonomy file is included here; notebooks use it as the reference list of feature groups.
-
-### Notebooks
-
-**`partition_ood_experiments.ipynb`**  
-Baseline run of the full ensemble on all datasets. Starting point for other comparisons.
-
-**`partition_ood_id_ood_experiments.ipynb`**  
-Compares fitting partitions on ID only vs ID + OOD (train splits only). Ran on all seven datasets.
-
-**`partitioning_scheme_experiment.ipynb`**  
-Measures single scheme families and their hyperparameters (quantile `n_bins`, k-means cluster count, tree depth and number of trees, plus a learned-hyperparameter variant). The run stopped early on Taxi, so results are incomplete.
-
-**`metacharacteristics_exclude_include_experiment.ipynb`**  
-Three input setups: meta-features only, meta-features plus raw features, raw features only. Partial runs on Taxi, Electricity, and Income.
-
-**`metacharacteristics_significance_experiment.ipynb`**  
-Compares **groups** of meta-features from the light taxonomy (not one feature at a time). Each group gets a CV score; output is a table and a ROC-AUC bar chart.
+The canonical taxonomy is `TAXONOMY_META_FEATURES` in `partition_ood.py` (36 descriptors in six groups). See `metacharacteristics_taxonomy_light.md`.
 
 ### Quick start
-
-Run notebooks from the repo root or from `point_wise_partition_meta/` if `sys.path` includes the parent directory.
 
 ```python
 from point_wise_partition_meta.partition_ood import load_dataset, full_pipeline
 
 ID, OOD = load_dataset('Taxi')
-results = full_pipeline(ID, OOD, n_splits=5, use_cv=True)
+results = full_pipeline(ID, OOD, cv_folds=5)
 ```
 
-Hyperparameter grids and meta-feature lists are defined inside the notebooks.
+### Scheme families: `partitioning_scheme_learning.py`
+
+`SingleSchemePartitionOOD` keeps only quantile, k-means, or tree partitions and uses the same 36-feature extractor as the full ensemble.
 
 ---
 
@@ -182,15 +122,14 @@ Main experiments live in `../sample_wise_ae_ks/autoencode_real_data.ipynb`.
 
 ### Datasets
 
-Seven tabular benchmarks with fixed ID/OOD splits from [ITMO NSS LAB](https://github.com/ITMO-NSS-team/OOD_Tab_Evaluation/tree/main).
+Six tabular benchmarks with fixed ID/OOD splits from [ITMO NSS LAB](https://github.com/ITMO-NSS-team/OOD_Tab_Evaluation/tree/main). These are the pairs used in the reported experiments.
 
 | Dataset | ID samples | OOD samples | Features | Numerical / categorical |
 | :-- | :--: | :--: | :--: | :-- |
-| **Taxi** | 10,000 | 10,000 | 7 | N: 7 |
+| **Taxi** | 10,000 | 10,000 | 6 | N: 6 |
 | **Electricity** | 9,986 | 10,014 | 6 | N: 6 |
 | **Income** | 20,380 | 9,782 | 12 | N: 4, C: 8 |
 | **MV X6** | 20,384 | 20,384 | 9 | N: 6, C: 3 |
-| **Diabites** | 34,288 | 1,500 | 183 | N: 10, C: 173 |
 | **California** | 10,315 | 10,319 | 7 | N: 6, C: 1 |
 | **ACS Accidents** | 22,653 | 3,955 | 45 | N: 45 |
 
