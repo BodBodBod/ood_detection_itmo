@@ -25,67 +25,152 @@ filterwarnings('ignore')
 # Meta-feature registry
 # =====================================================================
 
-ALL_META_FEATURES = [
-    # --- point-based ---
-    'dist_to_mean',
-    'normalized_dist',
-    'cosine_dist',
-    'dist_to_median',
-    'log_likelihood',
-    'local_outlier_factor_score',
-    'knn_distance_k',
+# Canonical taxonomy of meta-features, grouped by the type of distributional
+# information each descriptor encodes.  This dictionary is the single source of
+# truth for both the default representation and the group ablation, so that the
+# paper, the notebooks and the module cannot disagree about group membership.
+#
+# Naming notes:
+#   'local_outlier_factor_score' is the ratio between the mean k-nearest-
+#   neighbour distance of the query point and the mean k-nearest-neighbour
+#   distance inside the cell.  It is not the LOF score of Breunig et al.
+#   'mahalanobis' uses the diagonal of the cell covariance only.
+META_FEATURE_GROUPS = {
+    'point_based': [
+        'dist_to_mean',
+        'normalized_dist',
+        'cosine_dist',
+        'dist_to_median',
+        'log_likelihood',
+        'local_outlier_factor_score',
+        'knn_distance_k',
+        'out_of_range_count',
+    ],
+    'marginal_statistical': [
+        'mean_norm',
+        'std_norm',
+        'skew_norm',
+        'kurtosis_norm',
+        'median_abs_deviation_norm',
+        'iqr_norm',
+        'trimmed_mean_norm',
+    ],
+    'marginal_informational': [
+        'cell_entropy',
+        'marginal_entropy_mean',
+        'marginal_entropy_std',
+        'marginal_kl_to_reference_mean',
+        'quantile_surprisal_mean',
+    ],
+    'interaction_statistical': [
+        'mahalanobis',
+        'covariance_trace',
+        'covariance_logdet',
+        'mean_abs_correlation',
+        'pairwise_spearman_corr_mean_abs',
+        'covariance_condition_number',
+    ],
+    'interaction_informational': [
+        'pairwise_mutual_info_mean',
+        'pairwise_mutual_info_max',
+        'total_correlation',
+        'joint_entropy_pairwise_mean',
+        'pairwise_js_divergence_mean',
+    ],
+    'base': [
+        'log_count',
+        'density',
+        'n_beyond_2std',
+        'partition_agreement_count',
+        'leaf_depth',
+    ],
+}
 
-    # --- sample-based / marginal-char / statistical ---
-    'mean_norm',
-    'std_norm',
-    'skew_norm',
-    'kurtosis_norm',
-    'median_abs_deviation_norm',
-    'iqr_norm',
-    'trimmed_mean_norm',
-    # Backward-compatible features already used in experiments
+# Human-readable group labels used in tables and plots.
+META_FEATURE_GROUP_LABELS = {
+    'point_based': 'Point-based',
+    'marginal_statistical': 'Marginal statistical',
+    'marginal_informational': 'Marginal informational',
+    'interaction_statistical': 'Interaction statistical',
+    'interaction_informational': 'Interaction informational',
+    'base': 'Base',
+}
+
+# The 36 meta-features that constitute the representation reported in the paper.
+TAXONOMY_META_FEATURES = [
+    name for group in META_FEATURE_GROUPS.values() for name in group
+]
+
+# Descriptors that compute the same quantity as a canonical meta-feature.  They
+# are accepted for backward compatibility with earlier experiment notebooks and
+# are dropped from the representation, because a duplicated coordinate inflates
+# the nominal dimension without adding information.
+REDUNDANT_META_FEATURES = {
+    # np.corrcoef-based mean absolute off-diagonal correlation, identical to
+    # 'mean_abs_correlation' (see _compute_cell_stats).
+    'pairwise_pearson_corr_mean_abs': 'mean_abs_correlation',
+}
+
+# Descriptors kept in the implementation but excluded from the taxonomy, because
+# they duplicate information already carried by the point-based group.
+LEGACY_META_FEATURES = [
     'mean_radius',
     'max_radius',
-
-    # --- sample-based / marginal-char / informational ---
-    'cell_entropy',
-    'marginal_entropy_mean',
-    'marginal_entropy_std',
-    'marginal_kl_to_reference_mean',
-    'quantile_surprisal_mean',
-
-    # --- sample-based / feature-interaction / statistical ---
-    'mahalanobis',
-    'covariance_trace',
-    'covariance_logdet',
-    'mean_abs_correlation',
-    'pairwise_pearson_corr_mean_abs',
-    'pairwise_spearman_corr_mean_abs',
-    'covariance_condition_number',
-
-    # --- sample-based / feature-interaction / informational ---
-    'pairwise_mutual_info_mean',
-    'pairwise_mutual_info_max',
-    'total_correlation',
-    'joint_entropy_pairwise_mean',
-    'pairwise_js_divergence_mean',
-
-    # --- base ---
-    'log_count',
-    'density',
-    'out_of_range_count',
-    'n_beyond_2std',
-    'partition_agreement_count',
-    'leaf_depth',
 ]
 
-DEFAULT_META_FEATURES = [
-    'log_count',
-    'density',
-    'mean_norm',
-    'std_norm',
-    'dist_to_mean',
-]
+ALL_META_FEATURES = (
+    TAXONOMY_META_FEATURES
+    + list(REDUNDANT_META_FEATURES)
+    + LEGACY_META_FEATURES
+)
+
+DEFAULT_META_FEATURES = TAXONOMY_META_FEATURES
+
+
+def resolve_meta_features(meta_features):
+    '''
+    Validate a meta-feature list and remove redundant duplicates.
+
+    Parameters
+    ----------
+    meta_features : list of str or None
+        Requested descriptor names.  ``None`` selects the full taxonomy.
+
+    Returns
+    -------
+    list of str
+        The requested names with redundant duplicates removed and the original
+        order preserved.
+
+    Raises
+    ------
+    ValueError
+        If a name is not present in ``ALL_META_FEATURES``.
+    '''
+    if meta_features is None:
+        return list(TAXONOMY_META_FEATURES)
+
+    unknown = [name for name in meta_features if name not in ALL_META_FEATURES]
+    if unknown:
+        raise ValueError(
+            f'Unknown meta features: {sorted(set(unknown))}. '
+            f'Available: {ALL_META_FEATURES}'
+        )
+
+    resolved = []
+    for name in meta_features:
+        canonical = REDUNDANT_META_FEATURES.get(name, name)
+        if canonical not in resolved:
+            resolved.append(canonical)
+    return resolved
+
+
+def group_of(meta_feature):
+    '''Return the taxonomy group of a meta-feature, or None for legacy names.'''
+    for group, names in META_FEATURE_GROUPS.items():
+        if meta_feature in names:
+            return group
+    return None
 
 
 # =====================================================================
@@ -192,15 +277,7 @@ class EnsemblePartitionOOD:
         self.n_tree_partitions = n_tree_partitions
         self.tree_max_depth = tree_max_depth
         self.random_state = random_state
-        self.meta_features = meta_features if meta_features is not None else DEFAULT_META_FEATURES
-
-        # Validate meta feature names
-        unknown = set(self.meta_features) - set(ALL_META_FEATURES)
-        if unknown:
-            raise ValueError(
-                f"Unknown meta features: {unknown}. "
-                f"Available: {ALL_META_FEATURES}"
-            )
+        self.meta_features = resolve_meta_features(meta_features)
 
         self.scaler = StandardScaler()
         self.schemes = []
@@ -473,7 +550,7 @@ class EnsemblePartitionOOD:
                     tc = 0.5 * ((ldet_d if sign_d > 0 else np.log(eps)) - (ldet_c if sign_c > 0 else np.log(eps)))
                     s['total_correlation'] = float(max(0.0, tc))
 
-                if 'mean_abs_correlation' in mf or 'pairwise_pearson_corr_mean_abs' in mf:
+                if 'mean_abs_correlation' in mf:
                     if count > 1:
                         corr = np.corrcoef(X_g, rowvar=False)
                         if corr.ndim == 0:
@@ -481,14 +558,9 @@ class EnsemblePartitionOOD:
                         corr = np.nan_to_num(corr, nan=0.0, posinf=0.0, neginf=0.0)
                         iu = np.triu_indices(corr.shape[0], k=1)
                         vals = np.abs(corr[iu])
-                        mean_abs_corr = float(vals.mean()) if vals.size > 0 else 0.0
+                        s['mean_abs_correlation'] = float(vals.mean()) if vals.size > 0 else 0.0
                     else:
-                        mean_abs_corr = 0.0
-
-                    if 'mean_abs_correlation' in mf:
-                        s['mean_abs_correlation'] = mean_abs_corr
-                    if 'pairwise_pearson_corr_mean_abs' in mf:
-                        s['pairwise_pearson_corr_mean_abs'] = mean_abs_corr
+                        s['mean_abs_correlation'] = 0.0
 
                 if 'pairwise_spearman_corr_mean_abs' in mf:
                     if count > 1:
@@ -815,6 +887,43 @@ class EnsemblePartitionOOD:
 
         return np.hstack(all_features)
 
+    def scheme_families(self):
+        '''Return the partition family of each fitted scheme.'''
+        families = []
+        for scheme in self.schemes:
+            if isinstance(scheme, QuantileBinningScheme):
+                families.append('quantile')
+            elif isinstance(scheme, KMeansScheme):
+                families.append('kmeans')
+            elif isinstance(scheme, DecisionTreeScheme):
+                families.append('tree')
+            else:
+                families.append('other')
+        return families
+
+    def feature_names(self, raw_feature_names=None):
+        '''
+        Return the column names of the representation produced by ``transform``.
+
+        The names follow the layout ``<family><scheme index>__<meta-feature>``
+        and are ordered exactly as the columns of the transformed matrix, so
+        they can be attached to importance scores or model coefficients.
+
+        Parameters
+        ----------
+        raw_feature_names : list of str, optional
+            Names of the raw input features.  When given, they are appended in
+            the same order used by ``_build_ood_dataset_from_splits`` with
+            ``use_raw_features=True``.
+        '''
+        names = []
+        for idx, family in enumerate(self.scheme_families()):
+            for meta_feature in self.meta_features:
+                names.append(f'{family}{idx}__{meta_feature}')
+        if raw_feature_names is not None:
+            names.extend(f'raw__{name}' for name in raw_feature_names)
+        return names
+
     def fit_transform(self, X_train):
         '''Fit and transform in one step.'''
         self.fit(X_train)
@@ -961,6 +1070,7 @@ def _build_ood_dataset_from_splits(
     n_tree_partitions=5,
     tree_max_depth=3,
     use_raw_features=False,
+    include_meta=True,
     meta_features=None,
     partition_fit_data='id',
     balance_strategy='oversample',
@@ -970,23 +1080,32 @@ def _build_ood_dataset_from_splits(
     '''
     if partition_fit_data not in {'id', 'id+ood'}:
         raise ValueError("partition_fit_data must be one of {'id', 'id+ood'}")
+    if not include_meta and not use_raw_features:
+        raise ValueError('At least one of include_meta or use_raw_features must be True')
 
-    model = EnsemblePartitionOOD(
-        n_bins=n_bins,
-        n_kmeans_clusters=n_kmeans_clusters,
-        n_tree_partitions=n_tree_partitions,
-        tree_max_depth=tree_max_depth,
-        random_state=random_state,
-        meta_features=meta_features,
-    )
+    model = None
+    if include_meta:
+        model = EnsemblePartitionOOD(
+            n_bins=n_bins,
+            n_kmeans_clusters=n_kmeans_clusters,
+            n_tree_partitions=n_tree_partitions,
+            tree_max_depth=tree_max_depth,
+            random_state=random_state,
+            meta_features=meta_features,
+        )
 
-    X_partition_fit = X_train_id if partition_fit_data == 'id' else np.vstack([X_train_id, X_train_ood])
+        X_partition_fit = X_train_id if partition_fit_data == 'id' else np.vstack([X_train_id, X_train_ood])
 
-    model.fit(X_partition_fit)
-    R_train_id = model.transform(X_train_id)
-    R_test_id = model.transform(X_test_id)
-    R_train_ood = model.transform(X_train_ood)
-    R_test_ood = model.transform(X_test_ood)
+        model.fit(X_partition_fit)
+        R_train_id = model.transform(X_train_id)
+        R_test_id = model.transform(X_test_id)
+        R_train_ood = model.transform(X_train_ood)
+        R_test_ood = model.transform(X_test_ood)
+    else:
+        R_train_id = np.zeros((len(X_train_id), 0), dtype=np.float64)
+        R_test_id = np.zeros((len(X_test_id), 0), dtype=np.float64)
+        R_train_ood = np.zeros((len(X_train_ood), 0), dtype=np.float64)
+        R_test_ood = np.zeros((len(X_test_ood), 0), dtype=np.float64)
 
     if use_raw_features:
         raw_scaler = StandardScaler()
@@ -1031,6 +1150,7 @@ def build_ood_dataset(
     n_tree_partitions=5,
     tree_max_depth=3,
     use_raw_features=False,
+    include_meta=True,
     meta_features=None,
     partition_fit_data='id',
     balance_strategy='oversample',
@@ -1085,6 +1205,7 @@ def build_ood_dataset(
         n_tree_partitions=n_tree_partitions,
         tree_max_depth=tree_max_depth,
         use_raw_features=use_raw_features,
+        include_meta=include_meta,
         meta_features=meta_features,
         partition_fit_data=partition_fit_data,
         balance_strategy=balance_strategy,
@@ -1105,6 +1226,74 @@ def classification_metrics(y_test, y_pred, y_proba):
     f1 = round(sk_metrics.f1_score(y_test, y_pred), 4)
 
     return [roc_auc, pr_auc, accuracy, precision, recall, f1]
+
+
+def wilcoxon_paired(left, right):
+    '''
+    Two-sided Wilcoxon signed-rank test on paired fold scores.
+
+    Returns statistic, p-value and mean difference (left - right).  A constant
+    difference of zero is reported as p = 1.  With five folds the test has low
+    power; the p-value is still a useful sanity check against interpreting
+    fold noise as a systematic gap.
+    '''
+    left = np.asarray(left, dtype=np.float64)
+    right = np.asarray(right, dtype=np.float64)
+    if left.shape != right.shape:
+        raise ValueError('Paired series must have the same length')
+    mean_diff = float(np.mean(left - right))
+    if left.size == 0 or np.allclose(left, right):
+        return {'statistic': 0.0, 'p_value': 1.0, 'mean_diff': mean_diff}
+    try:
+        statistic, p_value = sp_stats.wilcoxon(
+            left, right, zero_method='pratt', alternative='two-sided'
+        )
+    except ValueError:
+        return {'statistic': np.nan, 'p_value': np.nan, 'mean_diff': mean_diff}
+    return {
+        'statistic': float(statistic),
+        'p_value': float(p_value),
+        'mean_diff': mean_diff,
+    }
+
+
+def aggregate_importance(feature_names, values):
+    '''
+    Average absolute importance by meta-feature name and by taxonomy group.
+
+    Feature names follow ``<family><index>__<meta-feature>`` from
+    ``EnsemblePartitionOOD.feature_names``.  Raw coordinates are stored under
+    the group ``raw``.
+    '''
+    rows = []
+    for name, value in zip(feature_names, values):
+        if name.startswith('raw__'):
+            descriptor = name[len('raw__'):]
+            group = 'raw'
+        elif '__' in name:
+            descriptor = name.split('__', 1)[1]
+            group = group_of(descriptor) or 'other'
+        else:
+            descriptor = name
+            group = group_of(name) or 'other'
+        rows.append({
+            'feature': name,
+            'descriptor': descriptor,
+            'group': group,
+            'importance': float(np.abs(value)),
+        })
+    frame = pd.DataFrame(rows)
+    by_descriptor = (
+        frame.groupby('descriptor', as_index=False)['importance']
+        .mean()
+        .sort_values('importance', ascending=False)
+    )
+    by_group = (
+        frame.groupby('group', as_index=False)['importance']
+        .mean()
+        .sort_values('importance', ascending=False)
+    )
+    return frame, by_descriptor, by_group
 
 
 def train_ood_classifiers(
@@ -1190,6 +1379,7 @@ def cross_validate_ood_classifiers(
     n_tree_partitions=5,
     tree_max_depth=3,
     use_raw_features=False,
+    include_meta=True,
     meta_features=None,
     partition_fit_data='id',
     balance_strategy='oversample',
@@ -1225,6 +1415,7 @@ def cross_validate_ood_classifiers(
             n_tree_partitions=n_tree_partitions,
             tree_max_depth=tree_max_depth,
             use_raw_features=use_raw_features,
+            include_meta=include_meta,
             meta_features=meta_features,
             partition_fit_data=partition_fit_data,
             balance_strategy=balance_strategy,
@@ -1444,6 +1635,7 @@ def full_pipeline(
     tree_max_depth=3,
     random_state=42,
     use_raw_features=False,
+    include_meta=True,
     meta_features=None,
     partition_fit_data='id',
     balance_strategy='oversample',
@@ -1483,6 +1675,7 @@ def full_pipeline(
             n_tree_partitions=n_tree_partitions,
             tree_max_depth=tree_max_depth,
             use_raw_features=use_raw_features,
+            include_meta=include_meta,
             meta_features=meta_features,
             partition_fit_data=partition_fit_data,
             balance_strategy=balance_strategy,
@@ -1530,12 +1723,14 @@ def full_pipeline(
         n_tree_partitions=n_tree_partitions,
         tree_max_depth=tree_max_depth,
         use_raw_features=use_raw_features,
+        include_meta=include_meta,
         meta_features=meta_features,
         partition_fit_data=partition_fit_data,
         balance_strategy=balance_strategy,
     )
 
-    print(f"Number of partitioning schemes: {len(model.schemes)}")
+    n_schemes = 0 if model is None else len(model.schemes)
+    print(f"Number of partitioning schemes: {n_schemes}")
     print(f"Representation dimension:       {X_train.shape[1]}")
     print(f"Train set: {X_train.shape[0]} samples "
           f"(ID: {int((y_train == 0).sum())}, OOD: {int((y_train == 1).sum())})")

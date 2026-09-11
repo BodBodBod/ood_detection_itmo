@@ -34,22 +34,26 @@ class SingleSchemeConfig:
     use_raw_features: bool = True
 
 
-class SingleSchemePartitionOOD:
+class SingleSchemePartitionOOD(EnsemblePartitionOOD):
     """
     Partition-based representation that uses only one scheme family:
     quantile, kmeans, or tree.
+
+    Cell statistics and meta-feature extraction are inherited from
+    ``EnsemblePartitionOOD``, so a 36-feature taxonomy is computed in full.
     """
 
     def __init__(self, config: SingleSchemeConfig):
-        self.config = config
-        self.meta_features = (
-            config.meta_features
-            if config.meta_features is not None
-            else DEFAULT_META_FEATURES
+        super().__init__(
+            n_bins=config.n_bins,
+            n_kmeans_clusters=config.n_kmeans_clusters,
+            n_tree_partitions=config.n_tree_partitions,
+            tree_max_depth=config.tree_max_depth,
+            random_state=config.random_state,
+            meta_features=config.meta_features,
         )
-        self.scaler = StandardScaler()
-        self.schemes = []
-        self.cell_stats = []
+        self.config = config
+        self.scheme_type = config.scheme_type
 
     def _build_schemes(self, n_features: int):
         cfg = self.config
@@ -64,7 +68,8 @@ class SingleSchemePartitionOOD:
         if cfg.scheme_type == "kmeans":
             n_kmeans = max(1, n_features // 2)
             for _ in range(n_kmeans):
-                n_select = max(2, rng.randint(2, n_features + 1))
+                n_select = max(2, rng.randint(2, n_features + 1)) if n_features >= 2 else 1
+                n_select = min(n_select, n_features)
                 feature_indices = rng.choice(n_features, size=n_select, replace=False)
                 schemes.append(
                     KMeansScheme(
@@ -86,95 +91,6 @@ class SingleSchemePartitionOOD:
             return schemes
 
         raise ValueError("scheme_type must be one of {'quantile', 'kmeans', 'tree'}")
-
-    def _compute_cell_stats(self, X, labels):
-        mf = set(self.meta_features)
-        stats = {}
-        unique_labels = np.unique(labels)
-        total = X.shape[0]
-        n_feat = X.shape[1]
-
-        need_mean = bool(
-            mf
-            & {
-                "mean_norm",
-                "dist_to_mean",
-            }
-        )
-        need_std = "std_norm" in mf
-
-        for g in unique_labels:
-            mask = labels == g
-            X_g = X[mask]
-            count = X_g.shape[0]
-
-            s = {"count": count}
-
-            if need_mean:
-                s["mean"] = X_g.mean(axis=0) if count > 0 else np.zeros(n_feat)
-            if need_std:
-                s["std"] = X_g.std(axis=0) if count > 1 else np.zeros(n_feat)
-
-            if "log_count" in mf:
-                s["log_count"] = np.log1p(count)
-            if "density" in mf:
-                s["density"] = count / total
-            if "mean_norm" in mf:
-                s["mean_norm"] = np.linalg.norm(s["mean"])
-            if "std_norm" in mf:
-                s["std_norm"] = np.linalg.norm(s["std"])
-
-            stats[g] = s
-
-        return stats
-
-    def _extract_features(self, X, scheme_idx, labels):
-        stats = self.cell_stats[scheme_idx]
-        mf_list = self.meta_features
-        n_samples = X.shape[0]
-        result = np.zeros((n_samples, len(mf_list)), dtype=np.float64)
-
-        for i, label in enumerate(labels):
-            if label not in stats:
-                continue
-            s = stats[label]
-            x = X[i]
-
-            for j, name in enumerate(mf_list):
-                if name == "log_count":
-                    result[i, j] = s["log_count"]
-                elif name == "density":
-                    result[i, j] = s["density"]
-                elif name == "mean_norm":
-                    result[i, j] = s["mean_norm"]
-                elif name == "std_norm":
-                    result[i, j] = s["std_norm"]
-                elif name == "dist_to_mean":
-                    result[i, j] = np.linalg.norm(x - s["mean"])
-
-        return result
-
-    def fit(self, X_train):
-        X_scaled = self.scaler.fit_transform(X_train)
-        self.schemes = self._build_schemes(X_scaled.shape[1])
-        self.cell_stats = []
-
-        for scheme in self.schemes:
-            scheme.fit(X_scaled)
-            labels = scheme.predict(X_scaled)
-            self.cell_stats.append(self._compute_cell_stats(X_scaled, labels))
-
-        return self
-
-    def transform(self, X):
-        X_scaled = self.scaler.transform(X)
-        all_features = []
-
-        for idx, scheme in enumerate(self.schemes):
-            labels = scheme.predict(X_scaled)
-            all_features.append(self._extract_features(X_scaled, idx, labels))
-
-        return np.hstack(all_features)
 
 
 def _build_supervised_dataset_from_splits(
