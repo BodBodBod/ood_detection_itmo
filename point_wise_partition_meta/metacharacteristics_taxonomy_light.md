@@ -1,77 +1,71 @@
-# Метахарактеристики
+# Meta-features (36)
 
-## 1) Point-based
+The representation uses 36 descriptors, grouped below.  `pairwise_pearson_corr_mean_abs` is an alias of `mean_abs_correlation` and is dropped.  `mean_radius` and `max_radius` are legacy descriptors and are not part of the taxonomy.
 
-Для конкретного объекта относительно его группы
+`local_outlier_factor_score` is the ratio of the query kNN distance to the mean kNN distance in the cell.  `mahalanobis` uses the diagonal of the cell covariance.
 
-| Метахарактеристика | Описание |
+## 1) Point-based (8)
+
+| Name | Description |
 |---|---|
-| `dist_to_mean` | Расстояние объекта до среднего в ячейке |
-| `normalized_dist` | Расстояние до среднего, нормированное на радиус ячейки |
-| `cosine_dist` | Косинусное расстояние до среднего в ячейке |
-| `dist_to_median` | Расстояние объекта до медианы ячейки |
-| `log_likelihood` | Лог-правдоподобие объекта в диагональной гауссовой модели ячейки |
-| `local_outlier_factor_score` | Локальный показатель выброса по соседям |
-| `knn_distance_k` | Расстояние до k-го ближайшего соседа |
+| `dist_to_mean` | Distance of the point to the cell mean |
+| `normalized_dist` | Distance to the mean, scaled by the cell radius |
+| `cosine_dist` | Cosine distance to the cell mean |
+| `dist_to_median` | Distance of the point to the cell median |
+| `log_likelihood` | Diagonal-Gaussian log-likelihood of the point in the cell |
+| `local_outlier_factor_score` | Query kNN distance divided by the cell mean kNN distance |
+| `knn_distance_k` | Distance to the k-th neighbour in the cell |
+| `out_of_range_count` | Number of coordinates outside the cell min–max range |
 
-## 2) Sample-based
+## 2) Marginal statistical (7)
 
-### 2.1) Marginal-char
-
-#### 2.1.1) Statistical
-
-| Метахарактеристика | Описание |
+| Name | Description |
 |---|---|
-| `mean_norm` | Норма вектора средних по признакам |
-| `std_norm` | Норма вектора стандартных отклонений |
-| `skew_norm` | Норма вектора асимметрии по признакам |
-| `kurtosis_norm` | Норма вектора эксцесса по признакам |
-| `median_abs_deviation_norm` | Робастная мера разброса (MAD) |
-| `iqr_norm` | Норма межквартильного размаха |
-| `trimmed_mean_norm` | Норма усеченного среднего по признакам |
+| `mean_norm` | Norm of the cell mean vector |
+| `std_norm` | Norm of the cell standard-deviation vector |
+| `skew_norm` | Norm of per-feature skewness |
+| `kurtosis_norm` | Norm of per-feature kurtosis |
+| `median_abs_deviation_norm` | Norm of the MAD vector |
+| `iqr_norm` | Norm of the interquartile-range vector |
+| `trimmed_mean_norm` | Norm of the 10%-trimmed mean |
 
-#### 2.1.2) Informational
+## 3) Marginal informational (5)
 
-| Метахарактеристика | Описание |
+| Name | Description |
 |---|---|
-| `cell_entropy` | Энтропия распределений признаков внутри ячейки |
-| `marginal_entropy_mean` | Средняя энтропия по признакам |
-| `marginal_entropy_std` | Разброс энтропий по признакам |
-| `marginal_kl_to_reference_mean` | Средняя KL-дивергенция к эталонному ID-распределению |
-| `quantile_surprisal_mean` | Средняя информационная редкость по квантилям |
+| `cell_entropy` | Entropy of feature histograms inside the cell |
+| `marginal_entropy_mean` | Mean marginal entropy |
+| `marginal_entropy_std` | Standard deviation of marginal entropies |
+| `marginal_kl_to_reference_mean` | Mean KL divergence to the ID reference |
+| `quantile_surprisal_mean` | Mean quantile surprisal |
 
-### 2.2) Feature-interaction
+## 4) Interaction statistical (6)
 
-#### 2.2.1) Statistical
-
-| Метахарактеристика | Описание |
+| Name | Description |
 |---|---|
-| `mahalanobis` | Расстояние Махаланобиса |
-| `covariance_trace` | След ковариационной матрицы |
-| `covariance_logdet` | Логарифм определителя ковариационной матрицы |
-| `mean_abs_correlation` | Средняя абсолютная корреляция между признаками |
-| `pairwise_pearson_corr_mean_abs` | Среднее абсолютное значение попарной корреляции Пирсона |
-| `pairwise_spearman_corr_mean_abs` | Среднее абсолютное значение попарной корреляции Спирмена |
-| `covariance_condition_number` | Число обусловленности ковариационной матрицы |
+| `mahalanobis` | Diagonal Mahalanobis distance to the cell mean |
+| `covariance_trace` | Trace of the cell covariance |
+| `covariance_logdet` | Log-determinant of the cell covariance |
+| `mean_abs_correlation` | Mean absolute Pearson correlation |
+| `pairwise_spearman_corr_mean_abs` | Mean absolute Spearman correlation |
+| `covariance_condition_number` | Condition number of the cell covariance |
 
-#### 2.2.2) Informational
+## 5) Interaction informational (5)
 
-| Метахарактеристика | Описание |
+| Name | Description |
 |---|---|
-| `pairwise_mutual_info_mean` | Средняя попарная взаимная информация |
-| `pairwise_mutual_info_max` | Максимальная попарная взаимная информация |
-| `total_correlation` | Общая корреляция (многомерная зависимость) |
-| `joint_entropy_pairwise_mean` | Средняя совместная энтропия по парам признаков |
-| `pairwise_js_divergence_mean` | Средняя JS-дивергенция между попарными совместными распределениями |
+| `pairwise_mutual_info_mean` | Mean pairwise mutual information |
+| `pairwise_mutual_info_max` | Maximum pairwise mutual information |
+| `total_correlation` | Gaussian total correlation |
+| `joint_entropy_pairwise_mean` | Mean pairwise joint entropy |
+| `pairwise_js_divergence_mean` | Mean pairwise Jensen–Shannon divergence |
 
-## 3) Base
+## 6) Base (5)
 
-Общие показатели, не про детальную форму распределения
-
-| Метахарактеристика | Описание |
+| Name | Description |
 |---|---|
-| `log_count` | Логарифм количества объектов в ячейке |
-| `density` | Доля объектов ячейки от общего числа в группе |
-| `n_beyond_2std` | Число признаков, выходящих за 2 стандартных отклонения |
-| `partition_agreement_count` | Согласованность назначения по разным схемам разбиения |
-| `leaf_depth` | Глубина листа дерева для объекта |
+| `log_count` | Log of the number of ID training points in the cell |
+| `density` | Cell size as a fraction of the ID training sample |
+| `n_beyond_2std` | Number of coordinates beyond two standard deviations |
+| `partition_agreement_count` | Number of schemes that place the point in a dense cell |
+| `leaf_depth` | Tree-leaf depth; zero for non-tree schemes |
