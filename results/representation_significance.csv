@@ -1,0 +1,55 @@
+dataset,model,metric,left,right,statistic,p_value,mean_diff
+Taxi,Logistic Regression,roc_auc,meta,raw,0.0,0.0625,0.5037
+Taxi,Logistic Regression,roc_auc,meta_raw,raw,0.0,0.0625,0.50368
+Taxi,Logistic Regression,roc_auc,meta_raw,meta,0.0,0.31731050786291415,-1.9999999999997796e-05
+Taxi,Random Forest,roc_auc,meta,raw,0.0,0.0625,-0.004239999999999999
+Taxi,Random Forest,roc_auc,meta_raw,raw,0.0,0.0625,-0.0022199999999999998
+Taxi,Random Forest,roc_auc,meta_raw,meta,0.0,0.0625,0.0020199999999999997
+Taxi,MLP,roc_auc,meta,raw,0.0,0.0625,0.08206
+Taxi,MLP,roc_auc,meta_raw,raw,0.0,0.0625,0.08178
+Taxi,MLP,roc_auc,meta_raw,meta,5.0,0.5844689121334483,-0.00027999999999999136
+Electricity,Logistic Regression,roc_auc,meta,raw,0.0,0.0625,0.16696000000000005
+Electricity,Logistic Regression,roc_auc,meta_raw,raw,0.0,0.0625,0.16792
+Electricity,Logistic Regression,roc_auc,meta_raw,meta,0.0,0.0625,0.0009599999999999609
+Electricity,Random Forest,roc_auc,meta,raw,0.0,0.0625,-0.007419999999999982
+Electricity,Random Forest,roc_auc,meta_raw,raw,0.0,0.0625,-0.00656000000000001
+Electricity,Random Forest,roc_auc,meta_raw,meta,0.0,0.0625,0.0008599999999999719
+Electricity,MLP,roc_auc,meta,raw,0.0,0.0625,-0.006999999999999984
+Electricity,MLP,roc_auc,meta_raw,raw,0.0,0.0625,-0.007099999999999973
+Electricity,MLP,roc_auc,meta_raw,meta,7.5,1.0,-9.999999999998899e-05
+Income,Logistic Regression,roc_auc,meta,raw,0.0,0.0625,0.04706000000000001
+Income,Logistic Regression,roc_auc,meta_raw,raw,0.0,0.0625,0.04931999999999996
+Income,Logistic Regression,roc_auc,meta_raw,meta,0.0,0.0625,0.002259999999999951
+Income,Random Forest,roc_auc,meta,raw,1.0,0.125,-0.0012800000000000144
+Income,Random Forest,roc_auc,meta_raw,raw,6.5,0.8125,-0.0002999999999999892
+Income,Random Forest,roc_auc,meta_raw,meta,0.0,0.0625,0.0009800000000000253
+Income,MLP,roc_auc,meta,raw,7.0,1.0,9.999999999998899e-05
+Income,MLP,roc_auc,meta_raw,raw,6.0,0.8125,-0.0009799999999999809
+Income,MLP,roc_auc,meta_raw,meta,3.0,0.3125,-0.0010799999999999699
+MVx6,Logistic Regression,roc_auc,meta,raw,0.0,0.0625,-0.02078000000000004
+MVx6,Logistic Regression,roc_auc,meta_raw,raw,0.0,0.0625,-0.02082000000000004
+MVx6,Logistic Regression,roc_auc,meta_raw,meta,0.0,0.15729920705028505,-3.999999999999559e-05
+MVx6,Random Forest,roc_auc,meta,raw,0.0,0.0625,-0.0048799999999999955
+MVx6,Random Forest,roc_auc,meta_raw,raw,0.0,0.0625,-0.00484
+MVx6,Random Forest,roc_auc,meta_raw,meta,7.0,1.0,3.999999999999559e-05
+MVx6,MLP,roc_auc,meta,raw,0.0,0.0625,-0.008519999999999972
+MVx6,MLP,roc_auc,meta_raw,raw,0.0,0.0625,-0.00843999999999998
+MVx6,MLP,roc_auc,meta_raw,meta,6.5,1.0,7.999999999999118e-05
+California,Logistic Regression,roc_auc,meta,raw,0.0,0.0625,-0.0024399999999999756
+California,Logistic Regression,roc_auc,meta_raw,raw,0.0,0.0625,-0.001959999999999984
+California,Logistic Regression,roc_auc,meta_raw,meta,0.0,0.05675944638601353,0.00047999999999999156
+California,Random Forest,roc_auc,meta,raw,0.0,0.0625,-0.0027200000000000115
+California,Random Forest,roc_auc,meta_raw,raw,0.0,0.0625,-0.0015800000000000258
+California,Random Forest,roc_auc,meta_raw,meta,0.0,0.0625,0.0011399999999999854
+California,MLP,roc_auc,meta,raw,0.0,0.0625,-0.0030399999999999984
+California,MLP,roc_auc,meta_raw,raw,0.0,0.0625,-0.0028200000000000226
+California,MLP,roc_auc,meta_raw,meta,5.0,0.625,0.00021999999999997578
+ACS Accidents,Logistic Regression,roc_auc,meta,raw,0.0,0.0625,0.47734
+ACS Accidents,Logistic Regression,roc_auc,meta_raw,raw,0.0,0.0625,0.47734
+ACS Accidents,Logistic Regression,roc_auc,meta_raw,meta,0.0,1.0,0.0
+ACS Accidents,Random Forest,roc_auc,meta,raw,0.0,1.0,0.0
+ACS Accidents,Random Forest,roc_auc,meta_raw,raw,0.0,1.0,0.0
+ACS Accidents,Random Forest,roc_auc,meta_raw,meta,0.0,1.0,0.0
+ACS Accidents,MLP,roc_auc,meta,raw,3.0,0.3961439091520741,0.0011400000000000078
+ACS Accidents,MLP,roc_auc,meta_raw,raw,2.0,0.17356816655592167,0.0019000000000000128
+ACS Accidents,MLP,roc_auc,meta_raw,meta,0.0,0.31731050786291415,0.0007600000000000051

@@ -1,0 +1,433 @@
+descriptor,importance,dataset,model
+out_of_range_count,2.306875116914831,Taxi,Logistic Regression
+mahalanobis,0.9687683844621959,Taxi,Logistic Regression
+log_likelihood,0.556005053939858,Taxi,Logistic Regression
+local_outlier_factor_score,0.41244697000873615,Taxi,Logistic Regression
+knn_distance_k,0.38958823383763025,Taxi,Logistic Regression
+dist_to_median,0.3549105241020594,Taxi,Logistic Regression
+normalized_dist,0.34422328697187327,Taxi,Logistic Regression
+dist_to_mean,0.30448651911989005,Taxi,Logistic Regression
+cosine_dist,0.2938712571051466,Taxi,Logistic Regression
+n_beyond_2std,0.2359263293138309,Taxi,Logistic Regression
+joint_entropy_pairwise_mean,0.1307850104268891,Taxi,Logistic Regression
+skew_norm,0.13069873331720036,Taxi,Logistic Regression
+marginal_kl_to_reference_mean,0.12993933627467938,Taxi,Logistic Regression
+covariance_condition_number,0.12786014515706226,Taxi,Logistic Regression
+median_abs_deviation_norm,0.12146026571561834,Taxi,Logistic Regression
+quantile_surprisal_mean,0.11517229783428713,Taxi,Logistic Regression
+mean_norm,0.11067883784044896,Taxi,Logistic Regression
+kurtosis_norm,0.10700027662589177,Taxi,Logistic Regression
+pairwise_mutual_info_max,0.10696554202588902,Taxi,Logistic Regression
+total_correlation,0.10285230541973664,Taxi,Logistic Regression
+pairwise_spearman_corr_mean_abs,0.0960641521087547,Taxi,Logistic Regression
+density,0.0952001386706893,Taxi,Logistic Regression
+trimmed_mean_norm,0.0948402972882116,Taxi,Logistic Regression
+covariance_logdet,0.08900601461374444,Taxi,Logistic Regression
+iqr_norm,0.08674428490933196,Taxi,Logistic Regression
+std_norm,0.08333571274349441,Taxi,Logistic Regression
+log_count,0.08168689618544367,Taxi,Logistic Regression
+marginal_entropy_std,0.07769846459456271,Taxi,Logistic Regression
+pairwise_js_divergence_mean,0.07541297101258418,Taxi,Logistic Regression
+covariance_trace,0.07090375448806771,Taxi,Logistic Regression
+pairwise_mutual_info_mean,0.06650463690180304,Taxi,Logistic Regression
+marginal_entropy_mean,0.05726940426483227,Taxi,Logistic Regression
+cell_entropy,0.05726940426483227,Taxi,Logistic Regression
+mean_abs_correlation,0.04742609340584122,Taxi,Logistic Regression
+partition_agreement_count,0.02779143375863557,Taxi,Logistic Regression
+leaf_depth,0.019182578633201535,Taxi,Logistic Regression
+out_of_range_count,0.034921641788337114,Taxi,Random Forest
+local_outlier_factor_score,0.011064981592102171,Taxi,Random Forest
+knn_distance_k,0.0030876788545887994,Taxi,Random Forest
+mahalanobis,0.0025491865932293647,Taxi,Random Forest
+log_likelihood,0.002368575751396016,Taxi,Random Forest
+dist_to_mean,0.0017950077038069825,Taxi,Random Forest
+dist_to_median,0.0017654609963775481,Taxi,Random Forest
+normalized_dist,0.0017423257079567432,Taxi,Random Forest
+cosine_dist,0.0014010307100467258,Taxi,Random Forest
+marginal_entropy_std,0.0005689796470759168,Taxi,Random Forest
+n_beyond_2std,0.000533975475919245,Taxi,Random Forest
+mean_abs_correlation,0.0005275231657502634,Taxi,Random Forest
+pairwise_mutual_info_mean,0.0004858360693597189,Taxi,Random Forest
+pairwise_spearman_corr_mean_abs,0.00046971433873533544,Taxi,Random Forest
+cell_entropy,0.0004453482918828183,Taxi,Random Forest
+trimmed_mean_norm,0.0004435999353093494,Taxi,Random Forest
+std_norm,0.0004419789782436877,Taxi,Random Forest
+joint_entropy_pairwise_mean,0.0004315752213934785,Taxi,Random Forest
+density,0.0004304394170559887,Taxi,Random Forest
+marginal_entropy_mean,0.00042318132314806377,Taxi,Random Forest
+mean_norm,0.00042097266401120825,Taxi,Random Forest
+marginal_kl_to_reference_mean,0.0004188030779013642,Taxi,Random Forest
+skew_norm,0.000414551159861879,Taxi,Random Forest
+kurtosis_norm,0.00040859521004507626,Taxi,Random Forest
+total_correlation,0.00040060389052697066,Taxi,Random Forest
+log_count,0.0003917347857506248,Taxi,Random Forest
+quantile_surprisal_mean,0.00037326741166617965,Taxi,Random Forest
+pairwise_mutual_info_max,0.0003725380489006695,Taxi,Random Forest
+pairwise_js_divergence_mean,0.0003661134479044507,Taxi,Random Forest
+median_abs_deviation_norm,0.00036354962240007675,Taxi,Random Forest
+covariance_logdet,0.00034671850271133446,Taxi,Random Forest
+iqr_norm,0.00034172135218799905,Taxi,Random Forest
+covariance_trace,0.00033890435010556526,Taxi,Random Forest
+partition_agreement_count,0.0003052530933698207,Taxi,Random Forest
+covariance_condition_number,0.0002667111676411899,Taxi,Random Forest
+leaf_depth,4.920818716929058e-07,Taxi,Random Forest
+out_of_range_count,2.218942068385849,Electricity,Logistic Regression
+normalized_dist,0.6171628889067433,Electricity,Logistic Regression
+dist_to_mean,0.6147854660222084,Electricity,Logistic Regression
+local_outlier_factor_score,0.5995330760110136,Electricity,Logistic Regression
+knn_distance_k,0.5979403278125094,Electricity,Logistic Regression
+mahalanobis,0.563960068833412,Electricity,Logistic Regression
+dist_to_median,0.33694111118651154,Electricity,Logistic Regression
+log_likelihood,0.2811519147639637,Electricity,Logistic Regression
+covariance_logdet,0.22038439719890643,Electricity,Logistic Regression
+cosine_dist,0.2068199285891313,Electricity,Logistic Regression
+skew_norm,0.19362421194694607,Electricity,Logistic Regression
+covariance_condition_number,0.16384286288837815,Electricity,Logistic Regression
+marginal_entropy_std,0.1600328187286412,Electricity,Logistic Regression
+density,0.15983899360312767,Electricity,Logistic Regression
+kurtosis_norm,0.14149221998710748,Electricity,Logistic Regression
+n_beyond_2std,0.1402858937639381,Electricity,Logistic Regression
+total_correlation,0.13550240452229753,Electricity,Logistic Regression
+joint_entropy_pairwise_mean,0.13373891711068103,Electricity,Logistic Regression
+pairwise_mutual_info_max,0.13263855458010335,Electricity,Logistic Regression
+quantile_surprisal_mean,0.12293982215437071,Electricity,Logistic Regression
+iqr_norm,0.12098152463928427,Electricity,Logistic Regression
+log_count,0.11922239821023288,Electricity,Logistic Regression
+pairwise_js_divergence_mean,0.11488862832309955,Electricity,Logistic Regression
+std_norm,0.11203998629717939,Electricity,Logistic Regression
+pairwise_mutual_info_mean,0.1104086188930392,Electricity,Logistic Regression
+marginal_kl_to_reference_mean,0.11013271929657378,Electricity,Logistic Regression
+mean_abs_correlation,0.10964422018493257,Electricity,Logistic Regression
+covariance_trace,0.10605893833158979,Electricity,Logistic Regression
+trimmed_mean_norm,0.10435042854197994,Electricity,Logistic Regression
+mean_norm,0.10191430182960233,Electricity,Logistic Regression
+marginal_entropy_mean,0.0965299970664036,Electricity,Logistic Regression
+cell_entropy,0.0965299970664036,Electricity,Logistic Regression
+pairwise_spearman_corr_mean_abs,0.09529566191422689,Electricity,Logistic Regression
+median_abs_deviation_norm,0.06948890463625865,Electricity,Logistic Regression
+leaf_depth,0.013506038949987613,Electricity,Logistic Regression
+partition_agreement_count,0.010321208861533343,Electricity,Logistic Regression
+knn_distance_k,0.02188388414273946,Electricity,Random Forest
+local_outlier_factor_score,0.020166222810880343,Electricity,Random Forest
+dist_to_mean,0.0035454951178019627,Electricity,Random Forest
+log_likelihood,0.0034927227053018163,Electricity,Random Forest
+dist_to_median,0.003097149983565674,Electricity,Random Forest
+mahalanobis,0.00265107453341536,Electricity,Random Forest
+normalized_dist,0.0024818412770156004,Electricity,Random Forest
+cosine_dist,0.0018340762833763432,Electricity,Random Forest
+out_of_range_count,0.0010337930428749428,Electricity,Random Forest
+mean_abs_correlation,0.0010159375731807988,Electricity,Random Forest
+pairwise_js_divergence_mean,0.0009867600493065505,Electricity,Random Forest
+density,0.0006867627740004846,Electricity,Random Forest
+std_norm,0.0006707611535024185,Electricity,Random Forest
+iqr_norm,0.0006266009397655222,Electricity,Random Forest
+pairwise_mutual_info_max,0.0005588686208582197,Electricity,Random Forest
+cell_entropy,0.0005055809281649123,Electricity,Random Forest
+marginal_entropy_std,0.00048048671151162237,Electricity,Random Forest
+n_beyond_2std,0.00043682980592166454,Electricity,Random Forest
+mean_norm,0.000403494750822452,Electricity,Random Forest
+pairwise_spearman_corr_mean_abs,0.00036441142198811625,Electricity,Random Forest
+covariance_logdet,0.0003626112047552728,Electricity,Random Forest
+covariance_trace,0.0003593482127101614,Electricity,Random Forest
+partition_agreement_count,0.0003438430620160291,Electricity,Random Forest
+trimmed_mean_norm,0.00033312163145576926,Electricity,Random Forest
+marginal_entropy_mean,0.0003189981715797482,Electricity,Random Forest
+total_correlation,0.000307615158902149,Electricity,Random Forest
+marginal_kl_to_reference_mean,0.000304978701157402,Electricity,Random Forest
+kurtosis_norm,0.00028917766197039934,Electricity,Random Forest
+log_count,0.0002877900440829523,Electricity,Random Forest
+pairwise_mutual_info_mean,0.00028246057199122983,Electricity,Random Forest
+quantile_surprisal_mean,0.00027645193825523705,Electricity,Random Forest
+skew_norm,0.00027306872750851384,Electricity,Random Forest
+joint_entropy_pairwise_mean,0.0002662624452066342,Electricity,Random Forest
+median_abs_deviation_norm,0.00026584935298576006,Electricity,Random Forest
+covariance_condition_number,0.00023423991799990804,Electricity,Random Forest
+leaf_depth,0.0,Electricity,Random Forest
+out_of_range_count,1.240358311439472,Income,Logistic Regression
+dist_to_mean,0.7620424344783592,Income,Logistic Regression
+normalized_dist,0.6308468999629824,Income,Logistic Regression
+local_outlier_factor_score,0.5466231939707129,Income,Logistic Regression
+knn_distance_k,0.5464604503261385,Income,Logistic Regression
+log_likelihood,0.39349586095102185,Income,Logistic Regression
+mahalanobis,0.34769094665775346,Income,Logistic Regression
+dist_to_median,0.3151353147344473,Income,Logistic Regression
+cosine_dist,0.30653258644533304,Income,Logistic Regression
+n_beyond_2std,0.12752744787816156,Income,Logistic Regression
+total_correlation,0.10276804410014327,Income,Logistic Regression
+skew_norm,0.09353727972889198,Income,Logistic Regression
+density,0.09142210907469088,Income,Logistic Regression
+kurtosis_norm,0.09076606340580312,Income,Logistic Regression
+iqr_norm,0.09038817655790228,Income,Logistic Regression
+trimmed_mean_norm,0.08886332111549772,Income,Logistic Regression
+mean_norm,0.08829493853226662,Income,Logistic Regression
+log_count,0.08308857940565519,Income,Logistic Regression
+median_abs_deviation_norm,0.07307611584949955,Income,Logistic Regression
+pairwise_spearman_corr_mean_abs,0.07088064019664851,Income,Logistic Regression
+pairwise_mutual_info_max,0.06885495789199092,Income,Logistic Regression
+covariance_logdet,0.06684741395464656,Income,Logistic Regression
+marginal_kl_to_reference_mean,0.06594943585242667,Income,Logistic Regression
+mean_abs_correlation,0.0650775544993749,Income,Logistic Regression
+covariance_condition_number,0.06349842140069764,Income,Logistic Regression
+marginal_entropy_std,0.061550715230751674,Income,Logistic Regression
+covariance_trace,0.06146086895501271,Income,Logistic Regression
+std_norm,0.05686671384593519,Income,Logistic Regression
+pairwise_mutual_info_mean,0.05520799831491166,Income,Logistic Regression
+pairwise_js_divergence_mean,0.05473502679523507,Income,Logistic Regression
+marginal_entropy_mean,0.05405876420504906,Income,Logistic Regression
+cell_entropy,0.05405876420504906,Income,Logistic Regression
+quantile_surprisal_mean,0.04851571447545835,Income,Logistic Regression
+joint_entropy_pairwise_mean,0.04815807880813817,Income,Logistic Regression
+leaf_depth,0.0053400461776876,Income,Logistic Regression
+partition_agreement_count,0.003188765603757571,Income,Logistic Regression
+local_outlier_factor_score,0.0027690486864488982,Income,Random Forest
+cosine_dist,0.0021094194818797236,Income,Random Forest
+mahalanobis,0.0020254860653752243,Income,Random Forest
+log_likelihood,0.0019766167089229343,Income,Random Forest
+knn_distance_k,0.0019285267585353715,Income,Random Forest
+pairwise_mutual_info_max,0.0019282652799386408,Income,Random Forest
+dist_to_median,0.001898213086875932,Income,Random Forest
+dist_to_mean,0.0018342207851190489,Income,Random Forest
+normalized_dist,0.001763782327417857,Income,Random Forest
+marginal_kl_to_reference_mean,0.0016258563554593462,Income,Random Forest
+median_abs_deviation_norm,0.0015374778308791942,Income,Random Forest
+joint_entropy_pairwise_mean,0.0014853380060475287,Income,Random Forest
+cell_entropy,0.0014129334567324653,Income,Random Forest
+kurtosis_norm,0.0014065706595202951,Income,Random Forest
+skew_norm,0.0013955367834059594,Income,Random Forest
+marginal_entropy_mean,0.0013804735383349295,Income,Random Forest
+pairwise_js_divergence_mean,0.0013465517291272639,Income,Random Forest
+log_count,0.001193679579736015,Income,Random Forest
+total_correlation,0.0011741225931516392,Income,Random Forest
+mean_abs_correlation,0.001151173266340047,Income,Random Forest
+marginal_entropy_std,0.0011016178031484822,Income,Random Forest
+density,0.000978499918635449,Income,Random Forest
+covariance_logdet,0.0009601510412338474,Income,Random Forest
+quantile_surprisal_mean,0.0009218025287844283,Income,Random Forest
+pairwise_spearman_corr_mean_abs,0.0008590950840565804,Income,Random Forest
+trimmed_mean_norm,0.0007797832253216358,Income,Random Forest
+covariance_condition_number,0.0007772314025629002,Income,Random Forest
+mean_norm,0.0006845775618453252,Income,Random Forest
+pairwise_mutual_info_mean,0.0005609524258675157,Income,Random Forest
+iqr_norm,0.0005405464954079057,Income,Random Forest
+partition_agreement_count,0.00046080096484347517,Income,Random Forest
+std_norm,0.0004308812450208218,Income,Random Forest
+n_beyond_2std,0.0004213518637542114,Income,Random Forest
+covariance_trace,0.00041051683592977265,Income,Random Forest
+out_of_range_count,0.00024705780136884494,Income,Random Forest
+leaf_depth,1.016925357152378e-07,Income,Random Forest
+out_of_range_count,1.724687747182924,MVx6,Logistic Regression
+local_outlier_factor_score,1.349154586035756,MVx6,Logistic Regression
+knn_distance_k,0.595483513934814,MVx6,Logistic Regression
+dist_to_mean,0.3389211496275961,MVx6,Logistic Regression
+dist_to_median,0.30817339961314155,MVx6,Logistic Regression
+log_likelihood,0.267865106049942,MVx6,Logistic Regression
+normalized_dist,0.26058205169567406,MVx6,Logistic Regression
+mahalanobis,0.2342749019831604,MVx6,Logistic Regression
+cosine_dist,0.17562922152271992,MVx6,Logistic Regression
+n_beyond_2std,0.07774495565219541,MVx6,Logistic Regression
+iqr_norm,0.07721277193976135,MVx6,Logistic Regression
+pairwise_mutual_info_max,0.07518233290099623,MVx6,Logistic Regression
+covariance_condition_number,0.07473457784323385,MVx6,Logistic Regression
+marginal_kl_to_reference_mean,0.06591308362236083,MVx6,Logistic Regression
+marginal_entropy_std,0.06472077723281745,MVx6,Logistic Regression
+mean_norm,0.06261250761572408,MVx6,Logistic Regression
+skew_norm,0.05762193779132537,MVx6,Logistic Regression
+std_norm,0.05484460031642015,MVx6,Logistic Regression
+trimmed_mean_norm,0.05409694556971762,MVx6,Logistic Regression
+mean_abs_correlation,0.05293106565655457,MVx6,Logistic Regression
+median_abs_deviation_norm,0.05264410163221709,MVx6,Logistic Regression
+covariance_trace,0.05255253912291945,MVx6,Logistic Regression
+joint_entropy_pairwise_mean,0.05175891121626064,MVx6,Logistic Regression
+log_count,0.04974498856291195,MVx6,Logistic Regression
+kurtosis_norm,0.048387148801980015,MVx6,Logistic Regression
+quantile_surprisal_mean,0.04622004619762583,MVx6,Logistic Regression
+total_correlation,0.04612386330348065,MVx6,Logistic Regression
+marginal_entropy_mean,0.043575052173316725,MVx6,Logistic Regression
+cell_entropy,0.043575052173316725,MVx6,Logistic Regression
+density,0.04180772019341355,MVx6,Logistic Regression
+pairwise_mutual_info_mean,0.04058422274130094,MVx6,Logistic Regression
+pairwise_spearman_corr_mean_abs,0.04010389948355777,MVx6,Logistic Regression
+covariance_logdet,0.03918144886883009,MVx6,Logistic Regression
+pairwise_js_divergence_mean,0.03880742912320814,MVx6,Logistic Regression
+partition_agreement_count,0.010383271350535756,MVx6,Logistic Regression
+leaf_depth,0.0018474904230280304,MVx6,Logistic Regression
+local_outlier_factor_score,0.008316676161125986,MVx6,Random Forest
+mahalanobis,0.006903420206179596,MVx6,Random Forest
+dist_to_mean,0.005323954228842584,MVx6,Random Forest
+log_likelihood,0.004973737504422633,MVx6,Random Forest
+normalized_dist,0.004736004209485693,MVx6,Random Forest
+dist_to_median,0.0041634814433822755,MVx6,Random Forest
+knn_distance_k,0.003890295072743236,MVx6,Random Forest
+out_of_range_count,0.003008375943932759,MVx6,Random Forest
+cosine_dist,0.0024301365086617645,MVx6,Random Forest
+partition_agreement_count,0.0007055975494976978,MVx6,Random Forest
+n_beyond_2std,0.0006259657524135813,MVx6,Random Forest
+pairwise_spearman_corr_mean_abs,0.0004910829331445493,MVx6,Random Forest
+median_abs_deviation_norm,0.0004873034901196181,MVx6,Random Forest
+iqr_norm,0.0004825062787068381,MVx6,Random Forest
+pairwise_mutual_info_max,0.00047429975632815144,MVx6,Random Forest
+covariance_logdet,0.0004688374922625267,MVx6,Random Forest
+pairwise_js_divergence_mean,0.0004684017980589727,MVx6,Random Forest
+pairwise_mutual_info_mean,0.000466359411247965,MVx6,Random Forest
+skew_norm,0.0004636248949859946,MVx6,Random Forest
+marginal_entropy_std,0.0004624302355349885,MVx6,Random Forest
+quantile_surprisal_mean,0.00045759663428762275,MVx6,Random Forest
+kurtosis_norm,0.0004573834153761845,MVx6,Random Forest
+joint_entropy_pairwise_mean,0.00045645673870952264,MVx6,Random Forest
+mean_abs_correlation,0.0004516533645725593,MVx6,Random Forest
+marginal_entropy_mean,0.00044959144768853213,MVx6,Random Forest
+cell_entropy,0.0004432638995947103,MVx6,Random Forest
+covariance_trace,0.0004424938059503599,MVx6,Random Forest
+marginal_kl_to_reference_mean,0.0004406324120504758,MVx6,Random Forest
+total_correlation,0.00043475321241977477,MVx6,Random Forest
+std_norm,0.0004316248629324196,MVx6,Random Forest
+trimmed_mean_norm,0.0004289383211389529,MVx6,Random Forest
+covariance_condition_number,0.0004256948121509921,MVx6,Random Forest
+mean_norm,0.0003927271726489889,MVx6,Random Forest
+density,0.0002536493143703312,MVx6,Random Forest
+log_count,0.0002465256949671256,MVx6,Random Forest
+leaf_depth,7.957561959087891e-08,MVx6,Random Forest
+local_outlier_factor_score,1.583482937289282,California,Logistic Regression
+out_of_range_count,1.5379035599879984,California,Logistic Regression
+knn_distance_k,1.3671640277306507,California,Logistic Regression
+normalized_dist,0.7512740498691898,California,Logistic Regression
+log_likelihood,0.7056915520451884,California,Logistic Regression
+mahalanobis,0.6099718533452477,California,Logistic Regression
+dist_to_median,0.6089174696041274,California,Logistic Regression
+cosine_dist,0.49937770915641394,California,Logistic Regression
+dist_to_mean,0.4273776067764902,California,Logistic Regression
+marginal_entropy_std,0.25202547740093195,California,Logistic Regression
+pairwise_mutual_info_max,0.2479288293445108,California,Logistic Regression
+covariance_condition_number,0.2160534063050143,California,Logistic Regression
+mean_abs_correlation,0.20474909402435007,California,Logistic Regression
+marginal_kl_to_reference_mean,0.20151869226234018,California,Logistic Regression
+mean_norm,0.184084293546139,California,Logistic Regression
+n_beyond_2std,0.18338212581404015,California,Logistic Regression
+trimmed_mean_norm,0.1792548671959016,California,Logistic Regression
+pairwise_spearman_corr_mean_abs,0.164104756011558,California,Logistic Regression
+std_norm,0.15355145359328773,California,Logistic Regression
+total_correlation,0.15062352794722347,California,Logistic Regression
+iqr_norm,0.15046313101626144,California,Logistic Regression
+covariance_trace,0.1491103930075411,California,Logistic Regression
+covariance_logdet,0.14777388319933474,California,Logistic Regression
+marginal_entropy_mean,0.13454008877821264,California,Logistic Regression
+cell_entropy,0.13454008877821264,California,Logistic Regression
+density,0.13253213367669567,California,Logistic Regression
+quantile_surprisal_mean,0.12159655488598184,California,Logistic Regression
+pairwise_mutual_info_mean,0.11353890825288368,California,Logistic Regression
+joint_entropy_pairwise_mean,0.11308236290622363,California,Logistic Regression
+log_count,0.11293158660854657,California,Logistic Regression
+median_abs_deviation_norm,0.10869397177635794,California,Logistic Regression
+pairwise_js_divergence_mean,0.10792030198642702,California,Logistic Regression
+skew_norm,0.09399906477321109,California,Logistic Regression
+kurtosis_norm,0.07598595115505516,California,Logistic Regression
+partition_agreement_count,0.027475699364948272,California,Logistic Regression
+leaf_depth,0.0044638237785369185,California,Logistic Regression
+pairwise_js_divergence_mean,0.005215117648577178,California,Random Forest
+trimmed_mean_norm,0.004508967249408836,California,Random Forest
+marginal_kl_to_reference_mean,0.0036033224818997375,California,Random Forest
+marginal_entropy_std,0.0030799769848489727,California,Random Forest
+mean_norm,0.003012885705726356,California,Random Forest
+log_count,0.0030042003998124226,California,Random Forest
+kurtosis_norm,0.00293266895858259,California,Random Forest
+pairwise_mutual_info_mean,0.0027698603685815453,California,Random Forest
+pairwise_mutual_info_max,0.0026957118733385156,California,Random Forest
+covariance_logdet,0.0026104755543295516,California,Random Forest
+marginal_entropy_mean,0.0025567390412107164,California,Random Forest
+dist_to_median,0.0023532132743153016,California,Random Forest
+out_of_range_count,0.0021298083074825797,California,Random Forest
+skew_norm,0.0021249747981179116,California,Random Forest
+local_outlier_factor_score,0.0018900153082218722,California,Random Forest
+median_abs_deviation_norm,0.001875033975753799,California,Random Forest
+density,0.001749203002445433,California,Random Forest
+total_correlation,0.0016705860166670598,California,Random Forest
+pairwise_spearman_corr_mean_abs,0.0016543307700373202,California,Random Forest
+covariance_trace,0.001528568192377302,California,Random Forest
+cell_entropy,0.001431295594219276,California,Random Forest
+joint_entropy_pairwise_mean,0.001306082841669581,California,Random Forest
+mean_abs_correlation,0.0012355767980511577,California,Random Forest
+mahalanobis,0.0012015560781157182,California,Random Forest
+quantile_surprisal_mean,0.0011430070528305747,California,Random Forest
+normalized_dist,0.0009717367428422195,California,Random Forest
+cosine_dist,0.0009122634543989454,California,Random Forest
+log_likelihood,0.0009089933763568714,California,Random Forest
+dist_to_mean,0.000869639935357741,California,Random Forest
+iqr_norm,0.0008222437140516267,California,Random Forest
+knn_distance_k,0.0008012143647436045,California,Random Forest
+covariance_condition_number,0.0007246277241497191,California,Random Forest
+std_norm,0.0007002499595129774,California,Random Forest
+n_beyond_2std,0.0005342825391905737,California,Random Forest
+partition_agreement_count,0.00013823657944108053,California,Random Forest
+leaf_depth,0.0,California,Random Forest
+out_of_range_count,0.11392210575398948,ACS Accidents,Logistic Regression
+covariance_condition_number,0.1132744258179955,ACS Accidents,Logistic Regression
+marginal_entropy_std,0.0031423290550168133,ACS Accidents,Logistic Regression
+partition_agreement_count,0.0025913702669083517,ACS Accidents,Logistic Regression
+quantile_surprisal_mean,0.0024593996708786097,ACS Accidents,Logistic Regression
+joint_entropy_pairwise_mean,0.0023686282408953733,ACS Accidents,Logistic Regression
+marginal_entropy_mean,0.0018435650124544302,ACS Accidents,Logistic Regression
+cell_entropy,0.0018435650124544302,ACS Accidents,Logistic Regression
+median_abs_deviation_norm,0.0018299056352682722,ACS Accidents,Logistic Regression
+mahalanobis,0.0016655107840292858,ACS Accidents,Logistic Regression
+covariance_logdet,0.0015787352658085726,ACS Accidents,Logistic Regression
+dist_to_median,0.00153664041394477,ACS Accidents,Logistic Regression
+log_likelihood,0.001535340862983711,ACS Accidents,Logistic Regression
+n_beyond_2std,0.0014688072896986012,ACS Accidents,Logistic Regression
+iqr_norm,0.0014669577623779191,ACS Accidents,Logistic Regression
+std_norm,0.0014574224642309138,ACS Accidents,Logistic Regression
+mean_abs_correlation,0.0013736455230050754,ACS Accidents,Logistic Regression
+marginal_kl_to_reference_mean,0.001308677803890681,ACS Accidents,Logistic Regression
+pairwise_mutual_info_max,0.001282305889746315,ACS Accidents,Logistic Regression
+cosine_dist,0.0011849269787790736,ACS Accidents,Logistic Regression
+trimmed_mean_norm,0.0011737187847273602,ACS Accidents,Logistic Regression
+mean_norm,0.0011569210355013395,ACS Accidents,Logistic Regression
+pairwise_spearman_corr_mean_abs,0.001144060228421736,ACS Accidents,Logistic Regression
+density,0.0011162214326457779,ACS Accidents,Logistic Regression
+normalized_dist,0.0010778719775016534,ACS Accidents,Logistic Regression
+total_correlation,0.0010765649342811402,ACS Accidents,Logistic Regression
+dist_to_mean,0.0010730433968244137,ACS Accidents,Logistic Regression
+kurtosis_norm,0.0010254255783596939,ACS Accidents,Logistic Regression
+covariance_trace,0.001012486544880863,ACS Accidents,Logistic Regression
+log_count,0.0009713770729196789,ACS Accidents,Logistic Regression
+pairwise_js_divergence_mean,0.000862552575574812,ACS Accidents,Logistic Regression
+pairwise_mutual_info_mean,0.0008623565078818349,ACS Accidents,Logistic Regression
+skew_norm,0.0008519825476360263,ACS Accidents,Logistic Regression
+local_outlier_factor_score,0.0006447471711441033,ACS Accidents,Logistic Regression
+knn_distance_k,0.0006156038638703662,ACS Accidents,Logistic Regression
+leaf_depth,4.140218875145811e-06,ACS Accidents,Logistic Regression
+out_of_range_count,0.012742248392692538,ACS Accidents,Random Forest
+total_correlation,0.0001934936585106528,ACS Accidents,Random Forest
+trimmed_mean_norm,0.00013784376110739015,ACS Accidents,Random Forest
+marginal_kl_to_reference_mean,0.0001308364611474095,ACS Accidents,Random Forest
+density,0.00011350202876438477,ACS Accidents,Random Forest
+pairwise_mutual_info_max,0.00011262278257763715,ACS Accidents,Random Forest
+log_likelihood,9.423127773525599e-05,ACS Accidents,Random Forest
+local_outlier_factor_score,6.952105449941028e-05,ACS Accidents,Random Forest
+median_abs_deviation_norm,6.716700322451674e-05,ACS Accidents,Random Forest
+dist_to_mean,5.629297158585805e-05,ACS Accidents,Random Forest
+covariance_logdet,5.5715606365775256e-05,ACS Accidents,Random Forest
+marginal_entropy_std,4.4514830358805e-05,ACS Accidents,Random Forest
+pairwise_js_divergence_mean,2.614352936426111e-05,ACS Accidents,Random Forest
+cell_entropy,2.3304099601799792e-05,ACS Accidents,Random Forest
+pairwise_mutual_info_mean,1.6065333855604176e-05,ACS Accidents,Random Forest
+joint_entropy_pairwise_mean,4.008922157408925e-06,ACS Accidents,Random Forest
+n_beyond_2std,1.3771753401810927e-06,ACS Accidents,Random Forest
+dist_to_median,0.0,ACS Accidents,Random Forest
+covariance_condition_number,0.0,ACS Accidents,Random Forest
+std_norm,0.0,ACS Accidents,Random Forest
+skew_norm,0.0,ACS Accidents,Random Forest
+quantile_surprisal_mean,0.0,ACS Accidents,Random Forest
+partition_agreement_count,0.0,ACS Accidents,Random Forest
+pairwise_spearman_corr_mean_abs,0.0,ACS Accidents,Random Forest
+covariance_trace,0.0,ACS Accidents,Random Forest
+leaf_depth,0.0,ACS Accidents,Random Forest
+kurtosis_norm,0.0,ACS Accidents,Random Forest
+iqr_norm,0.0,ACS Accidents,Random Forest
+mean_norm,0.0,ACS Accidents,Random Forest
+mean_abs_correlation,0.0,ACS Accidents,Random Forest
+cosine_dist,0.0,ACS Accidents,Random Forest
+marginal_entropy_mean,0.0,ACS Accidents,Random Forest
+mahalanobis,0.0,ACS Accidents,Random Forest
+knn_distance_k,0.0,ACS Accidents,Random Forest
+log_count,0.0,ACS Accidents,Random Forest
+normalized_dist,0.0,ACS Accidents,Random Forest

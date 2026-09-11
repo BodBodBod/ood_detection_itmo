@@ -1,0 +1,73 @@
+group,importance,dataset,model
+point_based,0.620300870250003,Taxi,Logistic Regression
+interaction_statistical,0.23333809070594438,Taxi,Logistic Regression
+marginal_statistical,0.1049654869200282,Taxi,Logistic Regression
+interaction_informational,0.0965040931573804,Taxi,Logistic Regression
+base,0.0919574753123602,Taxi,Logistic Regression
+marginal_informational,0.08746978144663875,Taxi,Logistic Regression
+point_based,0.007268337888076513,Taxi,Random Forest
+interaction_statistical,0.0007497930196955089,Taxi,Random Forest
+marginal_informational,0.00044591595033486854,Taxi,Random Forest
+interaction_informational,0.00041133333561705764,Taxi,Random Forest
+marginal_statistical,0.0004049955602941823,Taxi,Random Forest
+base,0.0003323789707934744,Taxi,Random Forest
+point_based,0.6841595977097413,Electricity,Logistic Regression
+interaction_statistical,0.209864358225241,Electricity,Logistic Regression
+interaction_informational,0.12543542468584412,Electricity,Logistic Regression
+marginal_statistical,0.12055593969690831,Electricity,Logistic Regression
+marginal_informational,0.11723307086247858,Electricity,Logistic Regression
+base,0.08863490667776393,Electricity,Logistic Regression
+point_based,0.007191898170444517,Electricity,Random Forest
+interaction_statistical,0.0008312704773416028,Electricity,Random Forest
+interaction_informational,0.0004803933692529567,Electricity,Random Forest
+marginal_statistical,0.0004088677454301193,Electricity,Random Forest
+marginal_informational,0.0003772992901337844,Electricity,Random Forest
+base,0.0003510451372042261,Electricity,Random Forest
+point_based,0.5926868815385584,Income,Logistic Regression
+interaction_statistical,0.11257597427735562,Income,Logistic Regression
+marginal_statistical,0.08311322986225662,Income,Logistic Regression
+interaction_informational,0.06594482118208382,Income,Logistic Regression
+base,0.06211338962799055,Income,Logistic Regression
+marginal_informational,0.05682667879374697,Income,Logistic Regression
+point_based,0.0018158607045710763,Income,Random Forest
+interaction_informational,0.0012990460068265177,Income,Random Forest
+marginal_informational,0.0012885367364919302,Income,Random Forest
+interaction_statistical,0.0010306089492497286,Income,Random Forest
+marginal_statistical,0.0009679105430573054,Income,Random Forest
+base,0.0006108868039009732,Income,Random Forest
+point_based,0.6275620969578211,MVx6,Logistic Regression
+interaction_statistical,0.08229640549304269,MVx6,Logistic Regression
+marginal_statistical,0.05820285909530653,MVx6,Logistic Regression
+marginal_informational,0.05280080227988751,MVx6,Logistic Regression
+interaction_informational,0.05049135185704932,MVx6,Logistic Regression
+base,0.03630568523641694,MVx6,Logistic Regression
+point_based,0.004605332634074617,MVx6,Random Forest
+interaction_statistical,0.0015305304357100971,MVx6,Random Forest
+interaction_informational,0.00046005418335287737,MVx6,Random Forest
+marginal_informational,0.00045070292583126596,MVx6,Random Forest
+marginal_statistical,0.0004491583479869995,MVx6,Random Forest
+base,0.00036636357737366535,MVx6,Random Forest
+point_based,0.9351486140574177,California,Logistic Regression
+interaction_statistical,0.2486272309821743,California,Logistic Regression
+marginal_informational,0.16884418042113586,California,Logistic Regression
+interaction_informational,0.1466187860874537,California,Logistic Regression
+marginal_statistical,0.13514753329374485,California,Logistic Regression
+base,0.09215707384855353,California,Logistic Regression
+interaction_informational,0.0027314717497667756,California,Random Forest
+marginal_informational,0.0023628682310018554,California,Random Forest
+marginal_statistical,0.0022824320515934422,California,Random Forest
+interaction_statistical,0.0014925225195101279,California,Random Forest
+point_based,0.001354610595464892,California,Random Forest
+base,0.0010851845041779018,California,Random Forest
+interaction_statistical,0.02000814402735684,ACS Accidents,Logistic Regression
+point_based,0.015198785052379695,ACS Accidents,Logistic Regression
+marginal_informational,0.002119507310938993,ACS Accidents,Logistic Regression
+interaction_informational,0.001290481629675895,ACS Accidents,Logistic Regression
+marginal_statistical,0.0012803334011573608,ACS Accidents,Logistic Regression
+base,0.0012303832562095111,ACS Accidents,Logistic Regression
+point_based,0.0016202867120641328,ACS Accidents,Random Forest
+interaction_informational,7.046684529311283e-05,ACS Accidents,Random Forest
+marginal_informational,3.9731078221602857e-05,ACS Accidents,Random Forest
+marginal_statistical,2.928725204741527e-05,ACS Accidents,Random Forest
+base,2.2975840820913172e-05,ACS Accidents,Random Forest
+interaction_statistical,9.285934394295877e-06,ACS Accidents,Random Forest
